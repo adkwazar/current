@@ -1,0 +1,1831 @@
+
+\title[BT2-212: Wprowadzenie]{Bioinformatyka 2 - kurs mały}
+\subtitle{Wprowadzenie i sprawy organizacyjne.\newline
+          Podstawy bioinformatyki sekwencji.}
+\author{Krzysztof Murzyn}
+\institute{%
+Zakład Biofizyki Obliczeniowej i Bioinformatyki\\ Wydział Biochemii,
+Biofizyki i Biotechnologii\\ Uniwersytet Jagielloński}
+\date{}
+
+\begin{document}
+
+\begin{frame}
+ \titlepage
+\end{frame}
+
+\only<presentation>{\begin{frame}
+ \frametitle{Plan wykładu}
+ \tableofcontents
+\end{frame}}
+
+\maketitle
+
+\begin{frame}
+\frametitle{Kontakt}\scriptsize
+dr hab. Krzysztof Murzyn\\
+Zakład Biofizyki Obliczeniowej i Bioinformatyki\\
+WBBiB UJ, 
+pok. B028 (\wgre{wtorek 11:00-11:45}), \wor{Teams} rozmowa / czat\\
+tel. (12) 664-63-79\\
+\wgre{email: krzysztof.murzyn@uj.edu.pl}\\
+{\wbl{http://bioinfo.mol.uj.edu.pl/modmol/People/KrzysztofMurzyn}}
+
+\end{frame}
+
+\section{Podstawowe informacje}
+
+\subsection{Terminy zajęć}
+
+\begin{frame}
+\frametitle{Zajęcia i warunki zaliczenia}
+
+\scriptsize
+
+ \begin{itemize} \item 5 wykładów (łącznie 10h), czwartek 10:30-12,
+ sala 1.01.13, \wor{stacjonarny} test
+ pojedynczego wyboru ($+2/-1/0$) z pytaniami otwartymi i zamkniętymi
+
+ \item 5 ćwiczeń (po 3h, 135 min), \wor{stacjonarny} test praktyczny
+       (zestaw zadań do samodzielnego rozwiązania) - łącznie 20h,
+       wszystkie ćwiczenia stacjonarnie
+
+ \item ćwiczenia rozpoczynają się w tygodniu po pierwszym wykładzie,
+ koordynatorem ćwiczeń (harmonogram, oceny, etc) jest mgr Adrian Kania
+\end{itemize}
+
+\begin{minipage}[t]{.65\textwidth}\vspace{0pt}
+\begin{itemize}
+ \item zaliczenie kursu
+ obejmuje: \begin{itemize}\scriptsize \item \wbl{zaliczenie ćwiczeń}\\
+ wykonanie ćwiczeń ($5 \cdot 6$~pkt), wynik testu praktycznego
+ (120 min, ok. 5 zadań, $70$~pkt); łącznie: $100$~pkt (ZAL
+ (50+)/NZAL) \item \wbl{zaliczenie wykładu} -- ocena do średniej,\\
+ warunek wstępny: zaliczenie ćwiczeń, wynik punktowy zaliczenia
+ ćwiczeń (maks. $100$ pkt) powiększony o wynik testu pojedynczego
+ wyboru zawierającego pytania z zagadnień poruszanych na wykładach i
+ ćwiczeniach (teoria, maks. $100$ pkt); łącznie:
+ $200$~pkt \end{itemize} \end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{.34\textwidth}\vspace{0pt}
+\scriptsize\centering\renewcommand{\arraystretch}{1.2}
+ \begin{tabular} {r | r}
+\multicolumn{2}{c}{Procentowa skala ocen}\\
+\hline
+bdb & $\ge$ 90 \%\\
++db & $[\; 80, 90 \;)$ \%\\
+db &  $[\; 70, 80 \;)$ \%\\
++dst & $[\; 60, 70 \;)$ \%\\
+dst & $[\; 50, 60 \;)$ \%\\
+ndst & $< 50$ \%
+ \end{tabular}
+\end{minipage}
+\end{frame}
+
+%% \begin{frame}
+%% \frametitle{Przebieg ćwiczeń}
+%% \scriptsize
+%% \begin{itemize}
+
+%%  \item niezależnie od tego czy zajęcia przebiegają zdalnie czy
+%%  stacjonarnie, studenci pracują w tzw. \wbl{zespołach ćwiczeniowych}
+%%  złożonych z 3-4 os. (zależnie od wielkości grupy zajęciowej (max. 16
+%%  os))
+
+%%  \item \wgre{\bf ćwiczenie 1}: wprowadzenie, organizacja środowiska
+%%  pracy (WSL/BASH, edytor tekstu (Win10: SublimeText4 lub VSCode,
+%%  MacOS: CotEditor), praca zdalna ssh/scp/sftp, polecenia powłoki
+%%  tekstowej), rozwiązywanie przykładowych zadań, \wpi{\bf prezentacja
+%%  ćwiczeniowca} dot. zagadnień do opracowania na kolejne
+%%  ćwiczenia, \wpi{\bf zadanie domowe}: omówienie zestawu ok. 8
+%%  pytań / zadań do przygotowania przez każdego studenta w
+%%  ramach \wbl{zespołów ćwiczeniowych}
+
+%%  \item \wgre{\bf ćwiczenia 2 --
+%%  5}: \begin{description} \item[\wpi{rozwiązywanie zadań}] (ok. 70$-$80
+%%  min) ćwiczeniowiec wybiera studenta z \wbl{zespołu ćwiczeniowego} do
+%%  rozwiązania wskazanego zadania w trybie \emph{na żywo} (wskazana
+%%  osoba omawia rozwiązanie, pozostałe osoby z zespołu są aktywne na
+%%  czacie); \wpi{oceniny jest zespół jako {\bf całość}} ; w trakcie
+%%  ćwiczeń każdy \wbl{zespół ćwiczeniowy} ma możliwość przedstawienia
+%%  rozwiązania dokładnie dwóch zadań \item[\wpi{prezentacja
+%%  ćwiczeniowca}] nowe zagadnienia do przygotowania na kolejne
+%%  ćwiczenia \item[\wpi{zadanie domowe}] treści zadań do rozwiązania
+%%  na kolejne ćwiczenia \end{description}
+
+%%  \item \wgre{\bf ćwiczenie 6}: \wpi{\bf rozwiązywanie zadań domowych}
+%%  oraz krótki \wpi{\bf test ćwiczeniowy} (20$-$30~min, 2
+%%  zadania, \wbl{praca indywidualna}), omówienie przygotowań do test
+%%  praktycznego
+
+%% \end{itemize}
+%% \end{frame}
+
+%% \begin{frame}
+%% \frametitle{Zaliczanie zadań problemowych}
+
+%% \begin{itemize}\scriptsize
+
+%%  \item wybrany przedstawiciel \wbl{grupy ćwiczeniowej} udostępnia
+%%  pulpit i omawia poszczególne etapy rozwiązywania konkretnego zadania,
+%%  interpretując na bieżąco uzyskiwane wyniki (zatem \wor{\bf należy
+%%  unikać prezentowania wyników uzyskanych przed ćwiczeniami})
+
+%%  \item pozostali członkowie \wbl{grupy ćwiczeniowej} mogą udzielać
+%%  wskazówek raportującemu studentowi lub uzupełniać jej / jego
+%%  wypowiedź, ale wyłącznie z wykorzystaniem \wor{\bf czata Teams}
+%%  (wiadomości widoczne dla wszystkich uczestników ćwiczeń)
+
+%%  \item student raportujący rozwiązanie zadania nie może przekroczyć
+%%  czasu wskazanego przez ćwiczeniowca (zazwyczaj 6 do 8 min) --
+%%  ograniczony czas zapewnia zachowanie odpowiedniego stopnia trudności
+%%  rozwiązywanego zadania i wymaga od studenta dobrego przygotowania
+
+%%  \item ćwiczeniowiec ocenia przedstawione rozwiązanie
+%%  zadania; \wor{\bf każdy członek zespołu otrzymuję taką samą ocenę}; w
+%%  ten sposób, ocena za rozwiązywane zadanie odzwierciedla
+%%  m.in. rozwijanie umiejętności pracy zespołowej a cały system
+%%  przygotowania do zajęć zachęca do dzielenia się wiedzą i
+%%  umiejętnościami
+
+%% \end{itemize}
+
+%% \centering\rule{.8\textwidth}{.5pt}\scriptsize
+
+%%  oceny cząstkowe z kursu (ćwiczenia, test próbny, test praktyczny,
+%%  test pojedynczego wyboru, końcowa ocena z ćwiczeń i wykładu dostępne
+%%  w systemie USOSweb (moduł Sprawdziany)
+
+%% \end{frame}
+
+\subsection{Zawartość kursu}
+
+\begin{frame}\frametitle{Wykłady}
+\begin{enumerate}\scriptsize
+ 
+ \item Wprowadzenie i sprawy organizacyjne. Podstawy bioinformatyki
+ sekwencji. Wprowadzenie do programowania w Pythonie. Pozyskiwanie i
+ przetwarzanie danych biologicznych. [Murzyn/Kania]
+
+ \item Metody przewidywania i walidacji struktury przestrzennej
+ białek. Metaserwery predykcyjne. [Murzyn]
+ 
+ \item Zaawansowane protokoły obliczeniowe w modelowaniu molekularnym
+ biocząsteczek. [Murzyn]
+
+ \item Techniki nauczania maszynowego w zastosowaniu do analizy danych
+ z mikromacierzy. [Kania]
+
+ \item Techniki przetwarzania i analizy danych z sekwencjonowania
+ nowej generacji. Potoki analityczne na serwerze Galaxy. [Majta]
+
+\end{enumerate}
+
+\centering\rule{.8\textwidth}{.5pt}\scriptsize
+
+Prezentacje z wykładów (PDF) będą na bieżąco udostępniane
+w~materiałach kursowych w~dedykowanym zespole
+Teams.
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Ćwiczenia}
+\begin{enumerate}\scriptsize
+ 
+ \item Pozyskiwanie i przetwarzanie danych biologicznych z
+ wykorzystaniem technik programowania w Pythonie. [Kania]
+
+ \item Metody przewidywania i walidacji struktury przestrzennej
+ białek. Metaserwer predykcyjne. [Gucwa]
+
+ \item Zaawansowane protokoły obliczeniowe w modelowaniu molekularnym
+ biocząsteczek. [Gucwa]
+
+ \item Techniki nauczania maszynowego w zastosowaniu do analizy danych
+ z mikromacierzy. [Kania]
+
+ \item Techniki przetwarzania i analizy danych z sekwencjonowania
+ nowej generacji. Serwer Galaxy. [Majta]
+
+\end{enumerate}
+
+\centering\rule{.8\textwidth}{.5pt}\scriptsize
+
+Materiały do ćwiczeń udostępniane przez ćwiczeniowca.
+
+\end{frame}
+
+
+%% \subsection{Biblioteka użytkownika kursu}
+
+%% \begin{frame}\frametitle{Interesujące książki}
+
+%% \begin{center}\begin{tabular}{c c c c}
+%% \includegraphics[width=.2\textwidth]{images/book_baxevanis_pwn.jpg} & 
+%% \includegraphics[width=.2\textwidth]{images/book_attwood-higgs_pwn.jpg} &
+%% \includegraphics[width=.2\textwidth]{images/book_barry.jpg} & 
+%% \includegraphics[width=.2\textwidth]{images/book_xiong.jpg}
+%% \end{tabular}\end{center}
+
+%% \raggedright
+%% \begin{itemize}\scriptsize
+
+%%  \item \wbl{Bioinformatics - A Practical Guide to the Analysis of
+%%  Genes and Proteins}, AD Baxevanis \& BFF Outellette, \wgo{*}
+
+%%  \item \wbl{Bioinformatics and Molecular Evolution}, T Attwood, P
+%%  Higgs, \wgo{****}
+
+%%  \item \wbl{Łatwe drzewa filogenetyczne}, H. Barry, \wgo{**}
+
+%%  \item \wbl{Podstawy bioinformatyki}, Xiong Jin, \wgo{**}
+
+
+%% \end{itemize}
+%% \end{frame}
+
+\subsection{Cele kursu}
+
+\begin{frame}
+\frametitle{Wiedza i umiejętności}
+\scriptsize
+
+\wbl{\small Wiedza}
+
+\begin{itemize}
+
+ \item wybrane zagadnienia bioinformatyki sekwencji oraz
+ bioinformatyki strukturalnej
+
+ \item pozyskiwanie i przetwarzanie danych biologicznych
+
+ \item przewidywanie i walidacja struktury przestrzennej białek
+ (modelowanie porównawcze, metaserwer predykcyjny iTasser)
+
+ \item wybrane protokoły obliczeniowe w modelowaniu molekularnym
+
+ \item techniki nauczania maszynowego w zastosowaniach bioinformatycznych
+
+ \item techniki przetwarzania i analizy danych z sekwencjonowania
+ nowej generacji (serwer Galaxy)
+
+\end{itemize}
+
+\wbl{\small Umiejętności}
+
+\begin{itemize}
+
+ \item uruchamianie i modyfikowanie prostych programów w języku Python
+ v3
+
+ \item obsługa specjalistycznego oprogramowania
+ bioinformatycznego: \wpi{Jupyter}, \wpi{Modeller}, \wpi{Gromacs}
+
+ \item korzystanie ze specjalistycznych serwisów internetowych,
+ m.in. \wpi{NCBI Entrez}, \wpi{iTasser}, \wpi{Galaxy}
+
+\end{itemize}
+\end{frame}
+
+\subsection{Praktyczne wskazówki}
+
+\begin{frame}
+\frametitle{macOS}
+
+\begin{minipage}[t]{.4\textwidth}\vspace{0pt}
+
+ \scriptsize Terminal
+ tekstowy\\[1ex] \includegraphics[width=\textwidth]{images/MacOS-search}
+ \includegraphics[width=\textwidth]{images/MacOS-terminal-app}
+ \includegraphics[width=\textwidth]{images/MacOS-terminal}
+
+\end{minipage}\hfill%
+\begin{minipage}[t]{.59\textwidth}\vspace{0pt}
+
+\begin{itemize}\scriptsize
+
+ \item  Edytor tekstu (np. CotEditor, coteditor.com)
+ \includegraphics[width=\textwidth]{images/coteditor}]
+
+\end{itemize}
+
+\vspace*{-4ex}\begin{itemize}\scriptsize
+ \item Zmiana domyślnego programu powłoki (zsh) na coś innego (np. bash,
+ csh): \wbl{chsh -s /bin/bash}.
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+%% \begin{frame}
+%% \frametitle{macOS: Xcode and Homebrew}
+
+%% \scriptsize\raggedright
+%% Instalacja \wgre{Xcode command line tools}
+%% oraz \wgre{Homebrew} \wgre{package management system} umożliwiają
+%% wygodne instalowanie pakietów oprogramowania z linii poleceń
+%% (np. \wbl{brew install emboss})
+%% \begin{minipage}[t]{.49\textwidth}\vspace{0pt}
+%% \scriptsize\raggedright
+%% Xcode jest zintegrowanym środowiskiem programistycznym dla macOS\\[1ex]
+
+%% \wgre{https://developer.apple.com/xcode/}
+
+%% \centering
+%% \includegraphics[width=.5\textwidth]{images/xcode}
+%% \end{minipage}\hfill%
+%% \begin{minipage}[t]{.49\textwidth}\vspace{0pt}
+%% \centering
+%% \includegraphics[width=.6\textwidth]{images/homebrew}
+%% \end{minipage}
+%% \end{frame}
+
+\begin{frame}
+\frametitle{Windows 10+}
+
+\begin{itemize}\scriptsize
+
+ \item Windows Subsystem for Linux,\newline
+ instalacja: \wgre{https://docs.microsoft.com/en-us/windows/wsl/install},\newline
+ dobre
+ praktyki: \wgre{https://docs.microsoft.com/en-us/windows/wsl/setup/environment}
+
+ \includegraphics[width=.6\textwidth]{images/microsoft-store}
+
+ \item edytor tekstu (VSCode (dla chcących programować), SublimeText4
+ (lekki i~minimalistyczny))
+
+ %% \item Miniconda
+ %% (\wgre{https://docs.conda.io/en/latest/miniconda.html}) (łatwa
+ %% instalacja m.in. pymola), izolowane środowiska programistyczne,
+ %% menager pakietów oprogramowania
+
+ %% \item ClustalX (\wgre{http://www.clustal.org/clustal2/})
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{MacOSX/Win10+/Linux: CONDA}
+
+
+\begin{itemize}\scriptsize
+
+ \item Conda otwartoźródłowy systemem zarządzania
+ pakietami oprogramowania dostępny na \wpi{conda.io} dla systemów
+ Win10+, Linux i MacOSX napisany w języku Python
+
+ \item Conda umożliwia tworzenie izolowanych środowisk
+ programistycznych (dowolny język programowania) oraz
+ instalowanie/aktualizowanie/usuwanie pakietów oprogramowania z
+ uwzględnieniem zależności między nimi
+
+ \item dystrybucja pakietów realizowana jest w kanałach (ang. channels), w
+ których zgrupowano (zazw. tematycznie) różnorodne oprogramowanie
+ 
+ \item minimalistyczną wersją systemu Conda jest Miniconda (przy
+ instalacji wybiera się domyślną wersję interpretera Pythona,
+ np. Python v3.11); wersje interpretera można późnie łatwo zmienić
+ (upgrade/downgrade)
+
+ \item wyszukiwanie pakietów oprogramowania można zrealizować z linii
+ poleceń (np. \wor{conda search pymol}) lub on-line na
+ stronie \wpi{anaconda.org} (Anaconda to Conda poszerzona o zestaw
+ pakietów Pythona (głównie z zakresu Danetyki (Data Science),
+ wzgl. Inżynierii i Analizy Danych)
+
+ \item użytkownicy Windows: warto zainstalować \wpi{WindowsTerminal}
+ (Microsoft Store, free)
+
+\end{itemize}
+
+\begin{Verbatim}[fontsize=\relsize{-3},frame=single,framesep=1mm]
+$ conda --version
+$ conda create --name wbbib-python   # no i np. niestety nie ta wersja pythona, którą chcemy
+$ conda activate wbbib-python
+$ python --version
+$ conda search python                # sprawdźmy, jakie wersje pythona dostępne
+$ conda install python=3.8.3         # w bieżącym środowisku instalujemy to co potrzebujemy
+$ python --version
+$ conda deactivate wbbib-python
+\end{Verbatim}
+
+\end{frame}
+
+
+
+\section{Podstawy bioinformatyki sekwencji}
+
+\begin{frame}
+\frametitle{Podstawy bioinformatyki sekwencji}
+
+\small
+\begin{minipage}[t]{.4\textwidth}\vspace{0pt}
+ \centering Porównywanie
+ sekwencji
+
+ \vspace*{2em}\includegraphics[width=.9\textwidth]{images/seq-align-matrix}
+\end{minipage}%
+\begin{minipage}[t]{.6\textwidth}\vspace{0pt}
+\centering Algorytmy 
+ heurystyczne
+
+ \vspace*{2em}\includegraphics[width=.9\textwidth]{images/blast-web}
+\end{minipage}
+
+\end{frame}
+
+\subsection{Porównywanie sekwencji}
+
+\begin{frame}[fragile]
+\frametitle{Zapis sekwencji: format FASTA}
+
+%%\begin{Verbatim}[fontsize=\scriptsize,
+%%                 frame=single,framesep=3mm,commandchars=\\\{\}]
+%%\wgo{>}\wor{gi|730028}|\wgre{sp}|\wbl{P40692}|\wpi{MLH1\_HUMAN} \wgo{DNA MISMATCH REPAIR PROTEIN MLH1}
+\begin{Verbatim}[fontsize=\tiny, frame=single, framesep=3mm, commandchars=\\\{\}]
+> gi|730028 | sp | P40692 | MLH1_HUMAN DNA MISMATCH REPAIR PROTEIN MLH1 
+MSFVAGVIRRLDETVVNRIAAGEVIQRPANAIKEMIENCLDAKSTSIQVIVKEGGLKLIQ
+IQDNGTGIRKEDLDTTSKLQSFEDLASISTYGFRGEALASISHVAHVTITTKTADGKCAY
+RASYSDGKLKAPPKPCAGNQGTQITVEDTRRKALKNPSEEYGKILEVVGRYSVHNAGISF
+SVKKQGETVADVRTLPNASTVDNIRSIFGNAVSRELIEIGCEKMNGYISNANYSVKKCIF
+LLFINHRLVESTSLRKAIETVYAAYLPKNTHPFLYLSLEISPQNVDVNVHPTKHEV
+\end{Verbatim}
+
+\begin{description}\scriptsize
+ \item[\tb{\wor{gi|730028}}] numer identyfikacyjny sekwencji
+ 
+ \item[\tb{\wgre{sp}}] kod bazy danych sekwencji (np. gb, emb, pdb)
+
+ \item[\tb{\wbl{P40692}}] kod dostępowy, alfanumeryczny identyfikator
+ rekordu bazy danych (zalecane używanie w cytowaniach)
+
+ \item[\tb{\wpi{MLH1\_HUMAN}}] nazwa rekordu: alfanumeryczny kod
+ (max. 10 znaków) identyfikujący sekwencję; nie uwzględniany w wielu
+ formatach, stąd nie zaleca się stosować go jako identyfikatora
+
+ \item[\tb{\wgo{DNA MISMATCH..}}] zwięzły opis sekwencji
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Homologia, konwergencja czy przypadek}
+\noindent\begin{minipage}[c]{.4\textwidth}
+\raggedright\relsize{-3}
+\begin{itemize}
+ \item podobieństwo sekwencji może wynikać z (1) pełnienia przez nie
+ podobnych funkcji w podobnym środowisku (białka błonowe), (2)
+ wspólnego pochodzenia ewolucyjnego, lub (3) przypadku
+
+ \item homologia: opis relacji między genami / białkami (sekwencjami)
+ wskazujący na ich wspólne pochodzenie ewolucyjne (własność binarna,
+ przechodność homologii)
+ 
+ \item sekwencje \wgo{homologiczne} łączy zależność \wgre{ortologii}
+ jeśli ich ostatni przodek istniał w momencie specjacji
+
+ \item jeśli ostatni wspólny przodek istniał w chwili duplikacji genu w
+ genomie przodka, wtedy obie sekwencje łączy zależność \wgre{paralogii}
+ 
+\end{itemize}
+\end{minipage}\vspace{.01\textwidth}%
+\begin{minipage}[c]{.59\textwidth}
+\includegraphics[width=\textwidth]{images/ortopara}
+\end{minipage}
+\hrule
+
+\begin{center}
+\relsize{-2}białko zaangażowane w poreplikacyjną korektę DNA
+
+\vspace*{2em}\begin{minipage}{.8\textwidth}
+\tiny\texttt{%
+\wgre{MSH2\_HUMAN}~~~\wor{626}~EK-{}GQGRIILKAS\wgo{RH}ACV\wgo{E}VQDEIA\wgo{FI}P\wgo{N}DVYFEKDKQMFH\wgo{IITGPNMGGKSTY}I\wgo{RQ}TGV~\wor{684}\\
+\wgre{MSH2\_YEAST}~~~\wor{644}~PMDSERRTHLISS\wgo{RH}PVL\wgo{E}MQDDIS\wgo{FI}S\wgo{N}DVTLESGKGDFL\wgo{IITGPNMGGKSTY}I\wgo{RQ}VGV~\wor{703}\\
+\wgre{MUTS\_ECOLI}~~~\wor{574}~DK-{}-{}-{}PGIRITEG\wgo{RH}PVV\wgo{E}QVLNEP\wgo{FI}A\wgo{N}PLNLSPQRR-{}ML\wgo{IITGPNMGGKSTY}M\wgo{RQ}TAL~\wor{629}}\\
+\verb|                          :  .**. :*   : .**.* : :.  :  : *************:**..:|
+\end{minipage}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Złudne \wpi{podobieństwo} sekwencji}
+
+\begin{tabular}{l l}
+\wor{HBA\_HUMAN} & łańcuch $\alpha$ globin, \wscgo{człowiek}\\
+\wor{HBB\_HUMAN} & łańcuch $\beta$ globin, \wscgo{człowiek}\\
+\wor{LGB2\_LUPLU} & leghemoglobina, \wscgo{łubin}\\
+\wbl{GTA1\_CAVPO} & \wpi{S-transferaza glutationu}, \wscgo{świnka morska}\\
+\end{tabular}\vfill
+
+\relsize{-2}\ttfamily
+\begin{tabular}{r l | r}
+\wor{HBA\_HUMAN} &  HGSAQVKGHGKKVADALTNAVAHVDDMPNAL & \wbl{38.7\%}\\
+           & ~|:~:||~|||||~~|~::~:||:|::~~~~ & \wpi{64.5\%}\\
+\wor{HBB\_HUMAN} &  MGNPKVKAHGKKVLGAFSDGLAHLDNLKGTF &\\[1ex]
+
+\wor{HBA\_HUMAN} &  HGSAQVKGHGKKVADALTNA-{}-{}-{}-{}-VAHVDDMPNAL & \wbl{22.5\%}\\
+          & ~~:~:::~|~~||~~~:~~|~~~~~|~~|~~~~~~| & \wpi{38.7\%}\\
+\wor{LGB2\_LUPLU} & GNNPELQAHAGKVFKLVYEAAIQLQVTGVVVTDATL & \\[1ex]
+
+\wor{HBA\_HUMAN} &  HGSAQVKGHGKKVAD-ALTNAVAHVDDMPNAL & \wbl{29.0\%}\\
+          &  ||~~~:~|:~~~~||~~||~~:~~|::~~~:| & \wpi{48.4\%}\\         
+\wbl{GTA1\_CAVPO} & HGQGYLVGNKLSKADILLTELLYMVEEFDASL &\\[1ex]
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Powtórzenia domen w białku SLIT}
+
+\begin{minipage}[t]{.38\textwidth}\vspace{0pt}
+\raggedright\relsize{-2}
+białko SLIT\newline (\emph{Drosophila melanogaster}):\\[1ex]
+
+24\wgo{LRR} (\emph{Leucine-Rich-Repeats}),\newline
+7~\wgo{EGF}\\[1ex]
+\wgre{dotmatcher}\newline \texttt{W13:T20 blosum62}
+\end{minipage}%
+\begin{minipage}[t]{.6\textwidth}\vspace{0pt}
+\vspace*{-3ex}\includegraphics[width=\textwidth]{images/dotplot-ex1}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Identyfikacja LCR}
+
+\begin{minipage}[t]{.5\textwidth}\vspace{0pt}
+\includegraphics[width=\textwidth]{images/LCR}
+\end{minipage}%
+\begin{minipage}[t]{.48\textwidth}\vspace{0pt}
+\raggedright\scriptsize
+\begin{itemize}
+
+ \item sekwencje o niskiej złożoności składu (LCR, ang.\ \emph{Low
+ Complexity Regions}) to odcinki, które cechuje nietypowy skład
+ aminokwasowy/nukleotydowy
+
+ \item identyfikację odcinków LCR często prowadzi się w oparciu o
+ tzw.\ parametr złożoności składu $K$, który można wyrazić na wiele
+ sposobów, np.\ dla:
+
+ {\relsize{1}\[ K = \frac{1}{L} \log_N \frac{L!}{\prod_i n_i!}
+ \]}
+
+ parametr $K$ będzie przyjmował wartości między 0.0 (niska złożoność
+ składu) a 1.0 (wysoka złożoność składu)
+
+\end{itemize}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dopasowanie lokalne}
+
+\raggedright\scriptsize
+\begin{tabular}{l l}
+\\ \wscgo{Cel}: & \parbox[t]{.8\textwidth}{\raggedright%\
+identyfikacja krótkich fragmentów sekwencji o możliwie największym
+podobieństwie}\\
+\\[1ex]
+\wscgo{Zastosowania:} & \parbox[t]{.8\textwidth}{\raggedright%\
+domeny białkowe\\
+egzony w genomowym DNA}\\
+\\[1ex]
+\end{tabular}
+
+\noindent\begin{center}\begin{tabular}{ c }
+\wscgo{Realizacja:}\\
+\\[-3ex]
+%\setlength{\fboxsep}{5mm}
+\fbox{\parbox[t]{.7\textwidth}{\raggedright\begin{itemize}
+\item zmodyfikowany algorytm dopasowania częściowego
+\item przy obliczaniu \wgre{$\mathcal{F}$}, za każdym razem, gdy
+\wgre{$\mathcal{F}(i,\,j) < 0 \Rightarrow \mathcal{F}(i,\,j) = 0$}, co
+oznacza rozpoczynanie nowego \wbl{lokalnego} dopasowania
+\item w kompletnej macierzy \wgre{$\mathcal{F}$: $\forall_{i,\,j}\;
+\mathcal{F}(i,\,j) \ge 0$}
+\item rekonstrukcja dopasowania (\emph{backtracing}) zaczyna się od
+największej wartości \wgre{$\mathcal{F}$} a kończy w pozycji, gdzie
+\wgre{$\mathcal{F}(i,j) = 0$}
+\end{itemize}}\rule{1em}{0pt}}\\
+\end{tabular}\end{center}\vspace{\stretch{3}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dopasowanie lokalne: algorytm}
+
+\vspace*{-1em}\noindent\small
+\wgo{\relsize{2}\[ \mathcal{F}(i,j) = \max \left\{ \begin{array}{l}
+\mathcal{F}(i-1,\,j-1) \pm 1\\
+\mathcal{F}(i-1,\,j) -2\\
+\mathcal{F}(i,\,j-1) -2\\
+0
+\end{array} \right. \]}
+
+\framesubtitle{\wgre{Programowanie dynamiczne i \emph{backtracking}}}
+\begin{minipage}[c]{.6\textwidth}\vspace{0pt}
+\ttfamily\bfseries\relsize{2}
+\begin{tabular}{ l | *{10}{r@{\hspace{.5em}}}}
+\multicolumn{2}{c}{} & T & G & A & T & A & G & G & A & C\\
+\cline{2-11}
+   &  \wor{0} &  \wor{0} &  \wor{0} &  \wbl{0} &  \wor{0} &  \wor{0} &  \wor{0} &  \wor{0} &  \wor{0} &  \wor{0}\\
+T  &  \wor{0} &  1 &  0 &  0 &  \wbl{1} &  0 &  0 &  0 &  0&   0\\
+A  &  \wor{0} &  0 &  0 &  1 &  0 &  \wbl{2} &  0 &  0 &  1&   0\\
+G  &  \wor{0} &  0 &  1 &  0 &  0 &  0 &  \wbl{3} & 1 &  0 &   0\\
+C  &  \wor{0} &  0 &  0 &  0 &  0 &  0 &  1 &  2 &  0&   1\\
+\end{tabular}\end{minipage}\hspace{.03\textwidth}%
+\begin{minipage}[t]{.3\textwidth}\vspace{0pt}
+\ttfamily\bfseries\relsize{3}\color{greenish}
+\begin{tabular}{*{10}{r@{\hspace{.2em}}}}
+T & G & A & T & A & G & G & A & C\\
+- & - & - & T & A & G & - & - & -
+\end{tabular}
+\end{minipage}\vspace{\stretch{3}}
+\end{frame}
+
+\begin{frame}
+ \frametitle{Macierz PAM250}
+
+\tiny
+\vspace*{-6ex}\begin{minipage}[t]{.2\textwidth}\vspace{0pt}
+\sffamily\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{| l | r | *{5}{r@{\hspace*{1em}}} | *{4}{r@{\hspace*{1em}}} | *{3}{r@{\hspace*{1em}}} | *{4}{r@{\hspace*{1em}}} | *{3}{r@{\hspace*{1em}}}}
+\cline{1-1}
+\wor{Cys} & \multicolumn{1}{r}{\wgre{12}}\\
+\cline{1-2}
+\wor{Ser} &  0 &  \wgre{2}\\
+\wor{Thr} & -2 &  \wgre{1} &  \wgre{3}\\
+\wor{Pro} & -3 &  \wgre{1} &  \wgre{0} &  \wgre{6}\\
+\wor{Ala} & -2 &  \wgre{1} &  \wgre{1} &  \wgre{1} &  \wgre{2}\\
+\wor{Gly} & -3 &  \wgre{1} &  \wgre{0} & \wgre{-1} &  \wgre{1} &  \multicolumn{1}{r}{\wgre{5}}\\
+\cline{1-7}
+\wor{Asn} & -4 &  1 &  0 & -1 &  0 &  0 &  \wgre{2}\\
+\wor{Asp} & -5 &  0 &  0 & -1 &  0 &  1 &  \wgre{2} &  \wgre{4}\\
+\wor{Glu} & -5 &  0 &  0 & -1 &  0 &  0 &  \wgre{1} &  \wgre{3} &  \wgre{4}\\
+\wor{Gln} & -5 & -1 & -1 &  0 &  0 & -1 &  \wgre{1} &  \wgre{2} &  \wgre{2} &  \multicolumn{1}{r}{\wgre{4}}\\
+\cline{1-11}
+\wor{His} & -3 & -1 & -1 &  0 & -1 & -2 &  2 &  1 &  1 &  3 &  \wgre{6}\\
+\wor{Arg} & -4 &  0 & -1 &  0 & -2 & -3 &  0 & -1 & -1 &  1 &  \wgre{2} &  \wgre{6}\\
+\wor{Lys} & -5 &  0 &  0 & -1 & -1 & -2 &  1 &  0 &  0 &  1 &  \wgre{0} &  \wgre{3} & \multicolumn{1}{r}{\wgre{5}}\\
+\cline{1-14}
+\wor{Met} & -5 & -2 & -1 & -2 & -1 & -3 & -2 & -3 & -2 & -1 & -2 &  0 &  0 &  \wgre{6}\\
+\wor{Ile} & -2 & -1 &  0 & -2 & -1 & -3 & -2 & -2 & -2 & -2 & -2 & -2 & -2 &  \wgre{2} &  \wgre{5}\\
+\wor{Leu} & -6 & -3 & -2 & -3 & -2 & -4 & -3 & -4 & -3 & -2 & -2 & -3 & -3 &  \wgre{4} &  \wgre{2} &  \wgre{6}\\
+\wor{Val} & -2 & -1 &  0 & -1 &  0 & -1 & -2 & -2 & -2 & -2 & -2 & -2 & -2 &  \wgre{2} &  \wgre{4} &  \wgre{2} &  \multicolumn{1}{r}{\wgre{4}}\\
+\cline{1-18}
+\wor{Phe} & -4 & -3 & -3 & -5 & -4 & -5 & -4 & -6 & -5 & -5 & -2 & -4 & -5 &  0 &  1 &  2 & -1 &  \wgre{9}\\
+\wor{Tyr} &  0 & -3 & -3 & -5 & -3 & -5 & -2 & -4 & -4 & -4 &  0 & -4 & -4 & -2 & -1 & -1 & -2 &  \wgre{7} & \wgre{10}\\
+\wor{Trp} & -8 & -2 & -5 & -6 & -6 & -7 & -4 & -7 & -7 & -5 & -3 &  2 & -3 & -4 & -5 & -2 & -6 &  \wgre{0} &  \wgre{0} & \multicolumn{1}{r}{\wgre{17}}\\
+\hline
+\end{tabular}
+\end{minipage}%
+\begin{minipage}[t]{.7\textwidth}\vspace{0pt}
+\raggedright\tiny
+\begin{tabbing}
+\hspace*{.2\textwidth}\=\hspace*{.15\textwidth}\=\hspace*{.3\textwidth}\=\hspace*{.6\textwidth}\= \kill
+ \parb{.9\textwidth}{macierz punktacji podstawień
+ aminokwasowych $\mathcal{S}$ jest symetryczna}\\
+
+ \> \parb{.9\textwidth}{średnia ocena podstawień w obrębie
+ \wgre{wydzielonych grup} reszt aminokwasowych jest wyraźnie większa
+ od zera, co wskazuje, że tego typu wymiany są częste w sekwencjach
+ homologicznych}\\
+
+ \> \> \parb{.7\textwidth}{w obrębie grupy, reszty aminokwasowe
+ wykazują podobieństwo własności fizykochemicznych}\\[1ex]
+
+ \> \> \> \normalsize$\mathcal{S}_{ij} = 10 \log_{10} \frac{p(i,j|H)}{p(i,j|R)}$\\[2ex]
+
+ \> \> \> \tiny\parbox{15em}{\raggedright częstość podstawień w sekw. homologicznych w~porównaniu z sekw. niespokrewnionymi}\\[-1ex]
+
+ \> \> \> \parbox{.65\textwidth}{\tiny\begin{center}\renewcommand{\arraystretch}{1.1}\begin{tabular}{ r | r l }
+$\mathcal{S}_{ij}$ & \multicolumn{2}{c}{$\wbl{\frac{p(i,j|H)}{p(i,j|R)}} = 10^{\mathcal{S}_{ij}/10}$}\\
+& & \\[-2ex]
+\hline
+-7 & \wbl{0.2} & mniejsza\\
++3 & \wbl{2.0} & większa\\
+0  & \wbl{1.0} & taka sama
+\end{tabular}\end{center}}
+\end{tabbing}
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+ \frametitle{PAM}
+ \framesubtitle{\wgre{jako seria macierzy podstawień aminokwasowych
+ (MPA)\newline albo jednostka czasu ewolucji}}
+\scriptsize
+
+ Poszczególne macierze PAM zostały zoptymalizowane w celu możliwie
+ najbardziej biologicznie poprawnego porównywania sekwencji o
+ zróżnicowanej odległości ewolucyjnej
+
+\begin{minipage}[t]{.3\textwidth}\vspace{0pt}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/matrixprod}
+\end{center}
+
+\begin{tabular}{r | r}
+odległ. & \\
+ewol.   & ID [\%]\\
+w PAM   & \\
+\hline
+30 & 75 \\
+80 & 50 \\
+120 & 38 \\
+250 & 20
+\end{tabular}
+\end{minipage}\hspace{.05\textwidth}
+\begin{minipage}[t]{.64\textwidth}\vspace{0pt}
+\begin{itemize}
+ \item kolejne mnożenia PAM1 przez siebie: \\[2ex]
+
+ Zmiany w długim czasie są \wor{ekstrapolowane} na podstawie zmian w
+ krótkim czasie co prowadzi jednak do propagacji i \wbl{kumulowania
+ błędów} wynikających z ograniczeń przyjętego modelu podstawień
+ aminokwasowych\\[2ex]
+
+ Np. przy porównywaniu blisko spokrewnionych sekwencji obserwowane
+ podstawienia aminokwasowe wynikają głównie (80\%) ze zmian
+ pojedynczego nukleotydu, podczas gdy dla dłuższych czasów dominujące
+ stają się zmiany dwu- i trzy nukleotydowe
+\end{itemize}
+\end{minipage}\vfill~
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Względna entropia MPA}
+
+\begin{minipage}[t]{.6\textwidth}\vspace{0pt}
+
+\begin{itemize}\scriptsize
+
+ \item wielkość entropii względnej $H$ MPA oznacza średnią ocenę
+ pojedynczej pozycji dopasowania (nie mylić ze średną ważoną
+ wartością MPA, która powinna być liczbą ujemną)
+
+\end{itemize}
+
+% \[ H = \sum_{i,\,j} q_{ij}\:s_{ij} = \sum_{i,\,j} q_{ij} \log_2
+% \frac{q_{ij}}{p_i\,p_j} \]
+
+ \vspace{-2ex}\relsize{-1}\[ H = \sum_{i,\,j} p(i,j|H)\:s_{ij} = \sum_{i,\,j}
+ p(i,j|H) \log_2 \frac{p(i,j|H)}{p(i,j|R)} \]
+
+\begin{itemize}\scriptsize
+
+ \item znajomość średniej ilości informacji na pojedynczej pozycji
+ dopasowania \mbox{(\wor{$H$})}, umożliwia wyznaczenie najmniejszej
+ długości MSP \mbox{(\wor{$\min |{\rm{MSP}}|$})} koniecznej do uznania
+ za istotne statystycznie wyników wyszukiwania przeprowadzonego z
+ wykorzystaniem określonej MPA
+
+\end{itemize}
+
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[t]{.38\textwidth}\vspace{0pt}
+
+\tiny\renewcommand{\arraystretch}{1.1}\sffamily
+\begin{tabular}{ r | c | r }
+
+ \parbox{5em}{\centering PAM distance} & \wor{$H$} [bit] &
+ \parbox{5em}{\centering \wor{$\min |{\rm{MSP}}|$} (30 bit)}\\[1.5ex]
+\hline
+0   & 4.17 & 8\\
+20  & 2.95 & 11\\ 
+40  & 2.26 & 14\\
+60  & 1.79 & 17\\
+80  & 1.44 & 21\\
+100 & 1.18 & 26\\
+120 & 0.98 & 31\\
+140 & 0.82 & 37\\
+160 & 0.70 & 43\\
+180 & 0.60 & 51\\
+200 & 0.51 & 59\\
+220 & 0.45 & 68\\
+240 & 0.39 & 78\\
+260 & 0.34 & 89\\
+280 & 0.30 & 100\\
+300 & 0.27 & 113\\
+320 & 0.24 & 127\\
+340 & 0.21 & 141\\
+\end{tabular}
+
+\end{minipage}
+
+\begin{itemize}\scriptsize
+
+ \item dla dużych wartości $H$, już względnie krótkie dopasowania
+ (MSP) mogą być uznane za istotne statystycznie
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{PAM: wpływ wyboru MPA na wynik dopasowania}
+
+\begin{minipage}[t]{.3\textwidth}\vspace{0pt}
+\raggedright
+
+%rysunek 4 z BioTechniques 2000: pelne pokrycie zakresu dystansów
+%ewolucyjnych z wykorzystaniem 3 macierzy
+
+\begin{center}
+\color{black}
+\includegraphics[width=\textwidth]{images/pam}
+\end{center}
+
+\vspace*{-2ex}\begin{center}
+\renewcommand{\arraystretch}{1.2}\scriptsize
+\begin{tabular}{r | c}
+
+ \parbox{4em}{\centering macierz PAM} & \parbox{4em}{\centering zakres
+ długości}\\[1ex]
+\hline
+40 & 9$\div$21\\
+120 & 19$\div$50\\
+240 & 47$\div$123\\
+\end{tabular}
+\end{center}
+
+\end{minipage}\hspace{.02\textwidth}%
+\begin{minipage}[t]{.65\textwidth}\vspace{0pt}
+\renewcommand{\arraystretch}{1.3}\scriptsize
+ 
+ \wgre{\bf Tabela}\newline Średni wynik (w bitach) na pozycję
+ dopasowania wyznaczanego z podaną macierzą PAM dla sekwencji o
+ \wor{zadanej odległości ewolucyjnej}
+
+\begin{center}\tiny
+ \begin{tabular}{c | r r r r r r r r}
+
+ \multirow{2}{*}{\parbox{4em}{\centering PAM matrix used}} &
+ \multicolumn{8}{c}{Actual PAM distance $D$ of segments}\\ 
+
+ & \wor{40} & 80 & \wor{120} & 160 & 200 & \wor{240} & 280 & 320\\[1ex]
+
+ \hline
+
+ \wor{40} & \wor{2.26} & 1.31 & 0.62 & 0.10 & -0.30 & -0.61 & -0.86 & -1.06\\
+ 80 & \wpi{2.14} & 1.44 & \wpi{0.92} & 0.53 & 0.23 & -0.02 & -0.21 & -0.37\\
+ \wor{120} & 1.93 & 1.39 & \wor{0.98} & 0.67 & 0.42 & 0.22 & 0.06 & -0.07\\
+ 160 & 1.71 & 1.28 & \wpi{0.95} & 0.70 & 0.50 & 0.33 & 0.20 & 0.09\\
+ 200 & 1.51 & 1.16 & 0.90 & 0.68 & 0.51 & \wpi{0.38} & 0.26 & 0.17\\
+ \wor{240} & 1.32 & 1.05 & 0.82 & 0.65 & 0.51 & \wor{0.39} & 0.29 & 0.21\\
+ 280 & 1.17 & 0.94 & 0.75 & 0.60 & 0.48 & \wpi{0.38} & 0.30 & 0.23\\
+ 320 & 1.03 & 0.84 & 0.68 & 0.56 & 0.46 & \wpi{0.37} & 0.30 & 0.24
+
+ \end{tabular}
+\end{center}
+\end{minipage}
+
+ \begin{itemize}\scriptsize
+
+ \item przeszukiwanie jest efektywne jeśli różnica między bieżącą
+ oceną jego wyników a oceną uzyskaną z wykorzystaniem optymalnie
+ dobranej macierzy jest mniejsza od 2~bitów (4-krotna różnica w
+ istotności statystycznej, 32/34$\approx$0.94)
+
+ \item maksymalna ocena jeśli $D = M$; dla każdej macierzy $M$, im
+ mniejszy rzeczywisty dystans ewolucyjny $D$ tym większa ocena
+ dopasowania
+
+ \end{itemize}
+
+\end{frame}
+
+\subsection{Algorytmy heurystyczne}
+
+
+\begin{frame}
+\frametitle{Szukanie homologów: problem klasyfikacji}
+
+\raggedright\tiny
+\begin{multicols}{2}
+
+ \wor{czułość} (ang. \emph{sensitivity}) -- parametr ($C$) określający
+ zdolność odszukania \wgo{wszystkich} sekwencji homologicznych
+
+\vspace{-2ex}
+
+\[ C = \frac{\rm{TP}}{\rm{TP} + \rm{FN}} \]
+
+ \begin{itemize}
+
+ \item wynik przeszukiwania jest zwykle \wgre{mniejszy} od
+ oczekiwanego, ponieważ nie zawiera odległych homologów o marginalnym
+ podobieństwie sekwencji
+
+ \item sekwencje homologiczne, które nie zostały odszukane określane
+ są jako wynik fałszywie ujemny (FN, ang.\ \emph{false
+ \wgre{negatives}}) 
+
+ \end{itemize}
+%% specyficznosc/specificity
+%% TN: wynik prawdziwie ujemny
+%% TP: wynik prawdziwie dodatni
+
+ \wor{selektywność} (swoistość, ang.\ \emph{selectivity}) -- parametr
+ ($S$) określający zdolność odszukania \wgo{wyłącznie} sekwencji
+ homologicznych
+
+\vspace{-2ex}
+
+\[ S = \frac{\rm{TP}}{\rm{TP} + \rm{FP}} \]
+
+ \begin{itemize}
+
+ \item wynik przeszukiwania może zawierać \wgre{dodatkowe} sekwencje
+ niesłusznie uznane za homologi, tzw. wynik fałszywie dodatni
+ (FP, ang. \emph{false \wgre{positives}})
+
+ \end{itemize}
+
+%%  \item[\wor{współczynnik korelacji}] -- parametr $k$ ($-1 \le k \le
+%%  +1$, $-1$) będący miarą efektywności przewidywania homologii na
+%%  podstawie wyników przeszukiwania bazy sekwencji w oparciu o określoną
+%%  metodę heurystyczną: $-1$ oznacza, że wyniki wyszukiwania są zawsze
+%%  błędne, $+1$ oznacza, że wyniki przewidywania są zawsze prawidłowe
+
+%%\vspace{-3ex}
+
+%% \[ k = \frac{\rm{TP} \cdot \rm{TN} + \rm{FP} \cdot \rm{FN}}
+%%        {\sqrt{\rm{PP} \cdot \rm{PN} + \rm{FP} \cdot \rm{FN}}} \]
+
+\begin{center}
+\color{black}
+\includegraphics[width=.7\columnwidth]{images/heuristic_evaluation}
+\end{center}
+
+\raggedright
+\begin{description}
+
+ \item[TP]: poprawnie zidentyfikowane homologii
+ \item[FN]: niewyszukane homologii
+ \item[FP]: sekwencje niehomologiczne błędnie opisane jako homologii
+ \item[TN]: rzeczywiste sekwencje niehomologiczne
+
+\end{description}
+\end{multicols}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+\frametitle{Wyniki przeszukiwania bazy danych sekwencji}
+
+\raggedright\scriptsize
+\begin{itemize}
+ \item lista sekwencji uszeregowanych według malejącego podobieństwa
+ do kwerendy wyznaczonego w oparciu o przyjęty system punktacji
+
+ \item dla każdej z wyszukanych sekwencji podawany jest jej
+ identyfikator, fragment opisu, długość sekwencji, punktowa ocena
+ podobieństwa z kwerendą, ta sama ocena wyrażona w jednostkach
+ bezwzględnych (bitach), wartość parametru $E$ (ang.\ \emph{E-value})
+
+ \item wartość $E < 0.01$ \wor{sugeruje} istnienie homologii między
+ sekwencją kwerendy a wyszukaną sekwencją bazodanową
+\end{itemize}
+
+\begin{center}
+\begin{BVerbatim}[fontsize=\tiny]
+PRIO_BOVIN P10279 bos taurus (bovine). major prion ( 264) 1430 266.0 5.6e-71
+PRIO_CHICK P27177 gallus gallus (chicken). major p ( 273)  438  88.5 1.7e-17
+K1CI_HUMAN P35527 homo sapiens (human). keratin, t ( 622)  206  47.3 9.3e-05
+RB56_HUMAN Q92804 homo sapiens (human). tata-bindi ( 592)  194  45.1  0.0004
+....
+ROA1_MACMU Q28521 macaca mulatta (rhesus macaque). ( 319)  157  38.2   0.026
+LEG3_CANFA P38486 canis familiaris (dog). galectin ( 295)  156  38.0   0.027
+K1CJ_MOUSE P02535 mus musculus (mouse). keratin, t ( 569)  159  38.8    0.03
+K1CM_MOUSE P08730 mus musculus (mouse). keratin, t ( 437)  157  38.4   0.032
+K1CJ_BOVIN P06394 bos taurus (bovine). keratin, ty ( 526)  158  38.6   0.032
+
+GRP8_ARATH Q03251 arabidopsis thaliana (mouse-ear  ( 169)  151  36.9   0.035
+EGG2_SCHJA P19469 schistosoma japonicum (blood flu ( 207)  152  37.1   0.035
+....
+EGG1_SCHMA P06649 schistosoma mansoni (blood fluke ( 173)  127  32.6    0.69
+SANT_PLAFV P09593 plasmodium falciparum (isolate v ( 375)  131  33.6    0.72
+\end{BVerbatim}
+\end{center}\vfill~
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Strategia przeszukiwania baz danych sekwencji}
+
+\vspace*{-1ex}\begin{itemize}\raggedright\scriptsize
+
+ \item bardzo szybkie wyznaczenie \wgre{przybliżonego} dopasowania
+ lokalnego z każdą z sekwencji w bazie danych
+
+ \item jeśli ocena takiego przybliżonego dopasowania jest odpowiednio
+ wysoka, konstruowane są kolejno coraz bardziej dokładne dopasowania
+ (im dokładniejszy algorytm wyznaczania dopasowania tym większa jego
+ złożoność obliczeniowa, dlatego algorytm programowania dynamicznego
+ uruchamiany jest wyłącznie zwykle dla kilkudziesięciu sekwencji
+ najbardziej podobnych do sekwencji kwerendy)
+
+%% szybkie (bo powierzchowne) przeszukanie bazy danych w celu
+%% wyeliminowania sekwencji niepodobnych (do ``przeglądania'' bazy
+%% używane są krótkie kilkuresztowe fragmenty kwerendy)
+%% \item dopasowanie lokalne kwerendy kolejno z najbardziej podobnymi
+%% sekwencjami
+
+\item statystyczna ocena istotności wyników przeszukiwania bazy danych:
+\end{itemize}
+
+\vspace*{-2ex}%
+\noindent\begin{minipage}[t]{.32\textwidth}\vspace{0pt}
+\color{black}
+\includegraphics[width=\textwidth]{images/evd}
+% E(x) = 100*exp(-(x-30)/10-exp(-(x-30)/10))
+\end{minipage}\hfill%
+\begin{minipage}[t]{.65\textwidth}\vspace{0pt}
+%\centering
+%\includegraphics[width=.6\textwidth]{dp-matrix}
+\begin{itemize}\scriptsize
+\item jaka jest średnia liczba sekwencji, których podobieństwo jest
+przypadkowe (analogia do relacji między szumem a sygnałem)
+\item jak bardzo wyznaczona ocena podobieństwa między kwerendą a
+odszukaną sekwencją bazodanową różni się od średniej oceny porównań z
+innymi sekwencjami
+\end{itemize}
+
+\begin{description}\raggedright\relsize{-3}
+\item[\wscgo{FastA}] W.R.~Pearson \& D.J.~Lipman (1988) Proc. Natl. Acad. Sci.
+USA 85:2444--2448
+\item[\wscgo{BLAST}] S.F.~Altschul, T.L.~Madden, A.A.~Sch\"{a}ffer, J.~Zhang,
+Z.~Zhang, W.~Miller, D.J.~Lipman (1997) Nucleic Acids Res.
+25:3389--3402
+\end{description}
+\end{minipage}\vfill~
+
+%% \begin{multicols}{2}
+%% \begin{description}\raggedright\relsize{-3}
+%% \item[\wscgo{FastA}] W.R.~Pearson \& D.J.~Lipman (1988) Proc. Natl. Acad. Sci.
+%% USA 85:2444--2448\columnbreak
+%% \item[\wscgo{BLAST}] S.F.~Altschul, T.L.~Madden, A.A.~Sch\"{a}ffer, J.~Zhang,
+%% Z.~Zhang, W.~Miller, D.J.~Lipman (1997) Nucleic Acids Res.
+%% 25:3389--3402
+%% \end{description}
+%% \end{multicols}\vspace{\stretch{3}}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\small Wpływ składu aminokwasowego
+na oceny istotności statystycznej}
+
+\begin{minipage}[c]{.3\textwidth}
+\includegraphics[width=\textwidth]{images/prio_raw}
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[c]{.38\textwidth}
+\scriptsize
+
+\[ P(z\ge{\cal{Z}}) = 1 -
+  \exp(-\rm{e}^{-1.282{\cal{Z}} - 0.5772}) \]
+\[ E(z\ge{\cal{Z}}) = DP(z\ge{\cal{Z}}) \]
+
+\hrule
+
+\[ P(z\ge7) < 7.11 \cdot 10^{-5} \]
+\[ E(101529) < 7.22 \]
+
+rzeczywistych homologów: $43$
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[c]{.3\textwidth}
+\includegraphics[width=\textwidth]{images/prio_pseg}
+\end{minipage}
+
+\vspace*{2ex}\noindent\begin{minipage}[t]{.54\textwidth}\vspace{0pt}
+\raggedright\tiny Założenia modelu statystycznego, przyjęte
+przy wyznaczaniu wartości \wgo{$E$} (ang. \wbl{\emph{\wgo{E}-value}}
+$\leftrightarrow$ \wbl{\emph{\wgo{E}rror per query}},
+\emph{false-positive rate}):
+\begin{itemize}
+\item oceny podobieństwa sekwencji tworzą rozkład wartości ekstremalnej
+\item losowo wygenerowane sekwencje mają takie same własności jak
+rzeczywiste sekwencje niespokrewnione 
+\end{itemize}
+W przypadku białek o \wgo{nietypowym składzie aminokwasowym}, ostatnie
+założenie nie jest spełnione.
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[t]{.45\textwidth}\vspace{0pt}\tiny
+{\bfseries\ttfamily\color{bluish}\relsize{2}PRIO\_ATEPA P51446}\\[-1ex]
+% pseg prio_atepa.fasta -p -c 46 -m 2
+\begin{flushleft}\ttfamily
+MANLGYWMLVLFVATWSDLGLCKKRPKPGG\\
+WNTGGSRYPGQGSPGGNRY{\color{gold}PPQGGGWGQPH\\
+GGGWGQPHGGGWGQPHGGGWGQPHGGGWGQ
+AGG}THNQWNKPSKPKTNMKHM{\color{gold}AGAAAAGAV\\
+VGGLGGYMLGSAMS}RPLIHFGNDYEDRYYR\\
+ENMYRYPNQVYYRPVDQYNNQNNFVHDCVN\\
+ITIKQH{\color{gold}TVTTTTKGENLTET}DVKMMERVVE\\
+QMCITQYERESQAYYQRGSSMVLFS{\color{gold}SPPVI\\
+LLISFLIFLIVG}
+\end{flushleft}
+\end{minipage}\vspace{\stretch{3}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Standaryzacja ocen lokalnego podobieństwa}
+
+\begin{itemize}\scriptsize
+
+ \item standardową jednostką podobieństwa pary sekwencji jest
+ \wbl{BIT} (1~\tb{bit} odpowiada ilości informacji koniecznej do
+ rozróżnienia między dwiema możliwościami, np.\ dzięki odpowiedziom
+ \wbl{TAK}/\wbl{NIE} na odpowiednio sformułowane pytania; dla
+ dokonania wyboru spośród $N$ możliwości potrzeba $\log_2N$ \tb{bitów}
+ informacji):
+
+ {\relsize{2}\[ E(s \ge S_{\rm{pkt}}) =
+  \mathcal{K}mn\,{\rm{e}}^{-\lambda S_{\rm{pkt}}} \]}
+
+
+{\relsize{2}\[ S_{\rm{bit}} = \frac{\lambda S_{\rm{pkt}} - {\rm{ln}}\,\mathcal{K}}{{\rm{ln}}\,2} \]}
+
+{\relsize{2}\[ E(s\ge S_{\rm{bit}}) = \frac{mn}{2^{S_{\rm{bit}}}} \]}
+
+\item wzrost oceny o 1~\tb{bit} powoduje dwukrotny wzrost istotności
+statystycznej (tj.~$E$ staje się dwukrotnie mniejsze)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Maskowanie sekwencji}
+
+\scriptsize
+\begin{itemize}
+
+ \item wiele sekwencji \wor{aminokwasowych} i \wgre{nukleotydowych}
+ zawiera powtarzające się odcinki sekwencji (powtórzenia tandemowe w
+ DNA, struktury skręconych helis: \emph{coiled-coils}, sekwencje rozproszone
+ (ALU), etc.)  lub fragmenty o niskiej złożoności składu
+
+ \item jeśli sekwencja kwerendy zawiera taki fragment, za statystycznie
+ istotne wyniki przeszukiwania bazy sekwencyjnej mogą być uznane
+ dopasowanie z niespokrewnionymi ewolucyjnie sekwencjami 
+
+\end{itemize}
+
+\begin{center}\tiny
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l | p{30em} | p{7em}}
+ \wgo{problem} & \wgo{opis} &
+ \wgo{rozwiązanie}\tabularnewline
+\hline
+powtórzenia & \raggedright tandemowe, np. \wbl{CACACA}: VNTR
+(\emph{Variable Numer of \wpi{Tandem Repeats}}, STR (\emph{Short Tandem
+Repeats}), \wpi{sekwencje rozproszone}: SINE (\emph{Short Interspersed
+Repetitive Element}, np.\ ALU), LINE, etc. & \wgre{DUST},
+\mbox{\wgre{RepeatMasker}}, \wor{XNU}\tabularnewline
+
+niska złożoność & \raggedright fragmenty sekwencji złożone z jendego
+lub niewielkiej liczby typów reszt (\emph{\wpi{Low Complexity Regions}}:
+LCR, np.\
+\emph{leucine-rich}/\emph{proline-rich} regions), odcinki poly-A w
+DNA & \wgre{DUST}, \wor{SEG} \tabularnewline
+
+wektory & \raggedright fragmenty wektorów klonujących są często na
+końcach, rzadziej w środku sekwencji bazowych/kwerendy &
+\wgre{CrossMatch}, \wgre{VecScreen}
+
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Macierz podstawień vs.\ profile podstawień}
+
+\begin{itemize}\scriptsize
+ \item przeszukiwanie bazy, w trakcie którego podobieństwo sekwencji
+ białkowych oceniane jest na podstawie macierzy podstawień, nader
+ często nie pozwala na popawne zidentyfikowanie odległych homologów
+ wykazujących marginalne podobieństwo do sekwencji kwerendy
+
+ \item znacznie bardziej czułe jest wyszukiwanie oparte o tzw. profile
+ podstawień (PSSM, \emph{Position Specific Scoring Matrix}), w których
+ ocena podobieństwa/różnicy pary reszt aminokwasowych w porównywanych
+ sekwencjach zależy nie tylko od rodzaju podstawienia (tj. np. $F
+ \leftrightarrow W$) ale również od pozycji w sekwencji.
+
+ Stąd mutacje (podstawienia/przerwy) w obrębie konserwatywnych
+ rejonach centrów aktywnych białek cechuje zdecydowanie większy koszt
+ niż zmiana tego samego typu mająca miejsce w
+ funkcjonalno-strukturalnie neutralnym fragmencie sekwencji.
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/pssm.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{PSI-BLAST}
+
+\begin{itemize}\scriptsize
+ \item metoda \emph{Position Specific Iterated Blast}
+ pozwala na iteracyjne przeszukiwanie bazy sekwencyjnej z
+ wykorzystaniem dynamicznie tworzonego profilu podstawień:
+
+\begin{itemize}\scriptsize
+ \item w pierwszej iteracji, podobieństwo sekwencji oceniane jest w
+ taki sam sposób jak w metodzie BLAST (np. BLOSUM62, $\gamma(k) = 10 +
+ k$)
+
+ \item w oparciu o wyszukane sekwencje, których ocena podobieństwa
+ charakteryzuje się współczynnikiem istotności statystycznej mniejszym
+ od zadanej wartości progowej (zwykle $E < 0.01$), tworzony jest
+ profil sekwencyjny używany w kolejnej iteracji
+\end{itemize}
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/psi_blast.png}
+\end{center}
+
+\end{frame}
+
+
+\section{Wprowadzenie do programowania w Pythonie}
+
+
+\begin{frame}
+\frametitle{Obiekty}
+
+\begin{itemize}\scriptsize
+
+ \item Python jest językiem programowania \wbl{obiektowego}, co w
+ praktyce oznacza, że w Pythonie \wgre{\bf wszystko jest obiektem}
+
+ \item \wor{obiekt} jest abstrakcyjnym pojęciem odwołującym się do
+ elementarnego składnika programu; utworzenie \wor{obiektu} prowadzi
+ do pojawienia się jego \wor{instancji}, czyli wydzielonego w pamięci
+ komputera obszaru zajmowanego przez dane tekstowe lub binarne oraz
+ kod wykonywalny funkcji (tzw. \wor{metod}), które na nich działają
+
+ \item obiektem w języku Python są zarówno zmienne typu tekstowego
+ (\wbl{string}), zmiennoprzecinkowego (\wbl{float}), całkowitego
+ (\wbl{int}) jak i funkcje, klasy (przepis definiujący obiekt) i
+ moduły (oddzielne pliki tekstowe zawierające dane tekstowe i kody
+ źródłowe funkcji lub klas)
+
+
+ \item nazwa obiektu
+ (\wpi{\tb{[a-zA-Z\_][a-zA-Z0-9\_]$\star\backslash$.py}}) nie może być
+ na liście słów zastrzeżonych (\wbl{and}, \wbl{print},
+ \wbl{import},..)
+
+
+ \item elementy składowe danego obiektu to jego \wor{atrybuty};
+ standardowa funkcja \wpi{dir(~)} wyświetla listę atrybutów danego
+ obiektu
+
+ \item poszczególne atrybuty obiektu są dostępne dzięki tzw. notacji z
+ kropką, tj. \wor{\tb{ob\_name.att\_name}}
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Operatory}
+
+\begin{description}\scriptsize
+
+ \item[przypisania] tożsamość obiektu (tzw.\ instancje) definiuje
+ jego \wor{nazwa} (identyfikator) za pomocą \wor{operator}a
+ przypisania \wpi{\tb{=}} (ang. \emph{assignment})
+
+\end{description}
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} tekst \wpi{=} \wbl{'Witaj'}                                  \wgre{\# przypisanie zwykłe}
+\wor{>>>} bruenet, ile_znakow \wpi{=} \wbl{'Witaj J-23'}, \wbl{len(tekst)}   \wgre{\# jednoczesne}
+\wor{>>>} j23 \wpi{=} bruener \wpi{=} \wbl{'Stawka większa niż życie'}       \wgre{\# wielokrotne}
+\wor{>>>} \wpi{bruenet.swapcase}()
+'wITAJ j-23'
+\end{Verbatim}
+% $
+\begin{description}\scriptsize
+ \item[zawierania] in (np.\ \verb+print('A' in 'Abracadabra')+)
+ \item[tożsamości] is (np.\ \verb+A is A+, \verb+A is B+)
+
+ \item[matematyczne] dodawanie (\verb|3+(1+2j).real|), odejmowanie
+ (\verb+4-2+), \mbox{mnożenie (\texttt{2*'ha'})}, dzielenie
+ (\verb+10.2/3.8+), \mbox{reszta z dzielenia (\texttt{10\%3})}, potęgowania
+ (\verb+2**8+)
+
+\item[logiczne] not, or (\wbl{lub}), and, \wbl{albo}
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Typy sekwencyjne}
+
+\begin{description}\small
+ \item[\wor{lista}] (ang. \emph{list}) pozwala na przechowywanie
+ uporządkowanej sekwencji obiektów dowolnego typu. Listę definiuje się
+ poprzez przypisanie wybranemu identyfikatorowi sekwencji obiektów
+ ujętych w nawiasy \wpi{kwadratowe} i~rozdzielonych przecinkami.
+\end{description}
+
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} a = [1,'ala',14,'aga',\wgre{$\backslash$}
+\wgre{...}      10.2,'abra']
+\wor{>>>} a
+[1, 'ala', 14, 'aga', 10.2, 'abra']
+\wor{>>>} a.sort()
+\wor{>>>} a
+[1, 10.2, 14, 'abra', 'aga', 'ala']
+\wor{>>>} a.append([2,3.14]); print(a)
+[1, 10.2, 14, 'abra', 'aga', 'ala', [2, 3.14]]
+\wor{>>>} a[3] = a[3].upper(); a[2:5]
+[14, 'ABRA', 'aga']
+\wor{>>>} b = a[-5:-1]; b.reverse(); b
+[[2, 3.14], 'ala', 'aga', 'ABRA', 14]
+\end{Verbatim}
+% $
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Typy sekwencyjne}
+
+\begin{description}\small
+ \item[\wor{krotka}] (ang. \emph{tuple}) niemodyfikowalna lista (stała
+ kolejność obiektów, wartości zmiennych). Składnia: \wpi{\tb{(a, b,
+ ...)}} 
+\end{description}
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} xyz = (1, 0.5, 'trzy')
+\wor{>>>} xyz[-2:]
+(0.5, 'trzy')
+\wor{>>>} xyz[-1]
+'trzy'
+\wor{>>>} xyz[-1] = 3
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+\wgre{TypeError}: object doesn't support item assignment
+\end{Verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Szeregi arytmetyczne i pętle}
+
+\hspace*{.03\textwidth}%
+\begin{minipage}[t]{.57\textwidth}\vspace{0pt}
+\begin{itemize}\small
+
+ \item[range] jest niemutowalną sekwencją liczb całkowitych, często
+ wykorzystywaną w~pętlach, składnia: \mbox{\wpi{\bf range([start,] stop[,
+ step])}}
+
+ \item w odróżnieniu od list, obiekt \wpi{range} zajmuje tę samę
+ niewielką ilość pamięci operacyjnej niezależnie od rozmiaru/zakresu
+
+ \item \wpi{\bf range} można określić jako \wor{leniwą} sekwencję liczb
+
+ \item leniwość (wartościowanie leniwe, ang. \wor{lazy evaluation},
+ przeciwieństwo: wartościowanie zachłanne/gorliwe (ang. \wor{eager
+ evaluation})) w programowaniu oznacza obliczanie wyrażeń tak późno
+ jak to możliwe
+
+\end{itemize}
+\end{minipage}\hfill%
+\begin{minipage}[t]{.39\textwidth}\vspace{0pt}
+\begin{Verbatim}[fontsize=\tiny,frame=single,label=\wgre{\bf range}]
+>>> range(10)
+range(0,10)
+>>> list(range(10))
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> tuple(range(1,10))
+(1, 2, 3, 4, 5, 6, 7, 8, 9)
+>>> list(range(3,10,2))
+[3, 5, 7, 9]
+>>> list(range(10,3,-2))
+[10, 8, 6, 4]
+>>> r = range(0,15,3)
+>>> r
+range(0, 15, 3)
+>>> 9 in r
+True
+>>> 11 in r
+False
+>>> r[-1]
+12
+>>> r[1:4:2]  # (3, 9)
+range(3, 12, 6)
+\end{Verbatim}
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Typy sekwencyjne}
+\begin{description}\small
+ \item[\wor{ciąg tekstowy}] (ang. \emph{string}) sekwencja znaków
+ ujęta między znakami apostrofu lub cudzysłowa/-ów
+%% \item FIXME: raw, unixcode
+\end{description}
+%% raw, unicode
+
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} cool = 'hej ho'
+\wor{>>>} ((cool[:3]+", ")*4).center(35)
+'     hej, hej, hej, hej,      '
+\wor{>>>} opis = \wgre{"""}
+\wpi{     hej ho, hej ho, }
+\wpi{do pracy by sie szlo \wgre{"""}}
+... ... >>> print(opis)
+
+\wpi{     hej ho, hej ho,}
+\wpi{do pracy by sie szlo}
+\end{Verbatim}
+% $
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Typ odwzorowujący: leksykony}
+
+\begin{minipage}[t]{.49\textwidth}\vspace{0pt}
+\raggedright\scriptsize
+ dane w leksykonie (ang. \emph{dictionary}) zorganizowane są w
+ taki sposób, że każdemu ze zdefiniowanych słów kluczowych (ang.
+ \emph{\wgre{keys}}) odpowiada tylko jedna wartość (ang.
+ \emph{\wpi{values}})
+
+\begin{Verbatim}[fontsize=\tiny,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} kesz = \{'\wgre{alicja}': \wpi{2150}, 
+...         '\wgre{wiktoria}': \wpi{4500}, 
+...         '\wgre{terminator}': \wpi{2150}\}
+\wor{>>>} kesz.\wbl{keys}()
+['wiktoria', 'alicja', 'terminator']
+\wor{>>>} kesz.\wbl{values}()
+[4500, 2150, 2150]
+\wor{>>>} kesz['alicja']
+2150
+\wor{>>>} kesz[2150]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+\wbl{KeyError}: 2150
+\end{Verbatim}
+
+ \raggedright
+ \wor{leksykon} nie może zawierać dwóch takich samych słów
+ kluczowych i nie przechowuje informacji o~kolejności swoich
+ elementów
+
+
+\end{minipage}\hfill%
+\begin{minipage}[t]{.49\textwidth}\vspace{0pt}
+\scriptsize\raggedright
+ \wgre{słowa kluczowe} leksykonów mogą być
+ typu \wbl{string}, \wbl{int}, \wbl{float}, \wbl{tuple} ale
+ np. nie \wbl{list}; \wpi{wartości} w leksykonie mogą być dowolnego
+ typu
+
+\begin{Verbatim}[fontsize=\tiny,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\}]
+\wor{>>>} kesz['nostromo'] = 3500
+\wor{>>>} kesz['alicja'] = 2750
+\wor{>>>} \wbl{del}(kesz['terminator'])
+\wor{>>>} kesz.\wbl{items}()
+[('wiktoria', 4500), ('alicja', 2750), \wgo{$\rhd$}
+                     ('nostromo', 3500)]
+\wor{>>>} kesz.\wbl{has_key}('Nostromo')
+0
+\wor{>>>} kesz[20031017] = kesz.keys()
+\wor{>>>} kesz.\wbl{get}(20031017)
+\wpi{['wiktoria', 'alicja', 'nostromo']}
+\wor{>>>} kesz[(4500,2750)] = $\backslash$
+...      \{'naczelna':'wiktoria',
+...       'szary pismak':'alicja'\}
+\wor{>>>} x = kesz[20031017]
+\wor{>>>} kesz[\wpi{x}] = 'to sie nie uda'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in ?
+\wbl{TypeError}: list objects are \wbl{unhashable}
+\end{Verbatim}
+\end{minipage}
+\end{frame}
+
+
+%% \begin{frame}
+%% \frametitle{print czyli o drukowaniu słów kilka}
+%% \end{frame}
+
+%% \begin{frame}
+%% biblioteka standardowa pythona, moduły i pakiety
+%% \end{frame}
+
+\subsection{Typy danych}
+
+\subsection{Konstrukcje syntaktyczne}
+
+\begin{frame}
+W celu kontrolowania przepływu informacji w programie oraz sterowania
+przebiegem programu wykorzystywane są:
+\begin{description}
+\item[konstrukcje warunkowe] (if..then..else), oraz
+\item[konstrukcje iteracyjne] (for, while)
+ \begin{itemize}\scriptsize \item iteracja (łac.\ \emph{iteratio}) --
+ czynność powtarzania (najczęściej wielokrotnego) tej samej instrukcji
+ (albo wielu instrukcji) w pętli. Mianem iteracji określa się także
+ wszystkie operacje wykonywane wewnątrz takiej pętli.
+ \end{itemize}
+\hfill\tiny\url{http://pl.wikipedia.org/wiki/Iteracja}
+\end{description}
+
+\begin{description}
+
+ \item[\wgre{Składnia}] każda z linii kodu w bloku poleceń
+ wykonywanych w ramach struktur decyzyjnych i cyklicznych jest
+ poprzedzona jednakową liczbą znaków odstępu lub tabulacji, stąd
+ odpowiednie fragmenty kodu widoczne są jako \wor{bloki} poleceń.
+\end{description}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Konstrukcje warunkowe}
+
+\begin{minipage}[t]{.45\textwidth}\vspace{0pt}
+\begin{itemize}\small
+ \item umożliwiają sterowanie wykonywaniem programu
+
+ \item ich podstawowym elementem są \wor{wyrażenia warunkowe}
+
+ \item warunek jest spełniony jeśli odpowiednie \wor{wyrażenie
+ warunkowe} zwraca liczbę różną od zera lub niepusty obiekt
+\end{itemize}
+\relsize{-2}\raggedright 
+\wgre{Składnia}:\newline
+\wbl{\tb{if~...}}\newline
+\wbl{\tb{if~...~else~...}}\newline
+\wbl{\tb{if~...~elif~...}}\newline
+\wbl{\tb{if~...~elif~...~else~...}}
+\end{minipage}\hspace{.02\textwidth}%
+\begin{minipage}[t]{.52\textwidth}\vspace{0pt}
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\},gobble=0]
+\wor{>>>} name = 'Mozart'
+\wor{>>>} \wbl{if} \wgre{name == 'Mozart'}\wbl{:}
+...     print('Wolfgang Amadeusz',name)
+... \wpi{elif} \wgre{name == 'Bach'}\wpi{:}
+...     print('Jan Sebastian',name)
+... \wpi{else:}
+...     print(name)
+...
+Wolfgang Amadeusz Mozart
+\wor{>>>}
+\end{Verbatim}
+% $
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Operatory porównań i logiczne}
+
+\begin{minipage}[t]{.45\textwidth}\vspace{0pt}
+\begin{itemize}\small
+
+ \item operatory
+ porównań:\newline \tb{==}, \tb{<}, \tb{>}, \tb{<=}, \tb{>=}, \tb{!=} \item
+ koniunkcja, alternatywa, alternatywa wykluczająca, negacja\\[1ex]
+
+\scriptsize \hspace*{-.2\textwidth}\begin{tabular}{l l}
+ X \wbl{and} Y &\parbox[t]{.3\textwidth}{\raggedright \wpi{\tb{prawda}} jeśli zarówno X jak i~Y jest \wpi{\tb{prawdą}}, \mbox{\wor{X \& Y}}}\\
+ X \wbl{or} Y &\parbox[t]{.4\textwidth}{\raggedright\wpi{\tb{prawda}} jeśli X lub Y jest \wpi{\tb{prawdą}}, \mbox{\wor{ X $|$ Y}}}\\
+ \wbl{operator.xor(}X, Y\wbl{)} & \parbox[t]{.4\textwidth}{\raggedright\wpi{\tb{prawda}} jeśli X \underline{albo} albo Y jest \wpi{\tb{prawdą}}, \mbox{\wor{X $^\wedge$ Y}}}\\
+ \wbl{not} X &\parbox[t]{.4\textwidth}{\raggedright\wpi{\tb{prawda}} jeśli X jest \wpi{\tb{fałszem}}}
+ \end{tabular}
+ \end{itemize}
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[t]{.53\textwidth}\vspace{0pt}
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\},gobble=0]
+\wor{>>>} a, name = 1920, 'Muchomorek'
+\wor{>>>} if \wbl{1900 < a < 1930} and $\backslash$
+...       name == 'Muchomorek':
+...    print('Witaj Muchomorku')
+...
+'Witaj Muchomorku'
+\wor{>>>} a = []
+\wor{>>>} if a:  print('Lista nie jest pusta')
+...
+\wor{>>>} a.append(\wgre{None})
+\wor{>>>} if a[0]:  print('Element okreslony')
+...
+\wor{>>>} if a[0] \wbl{is} None:  
+...   print('Element jest \wgre{nie okreslony}')
+...
+Element jest nie okreslony
+\end{Verbatim}
+% $
+
+\raggedleft
+\tiny zobacz: \wbl{http://docs.python.org/library/operator.html\#mapping-operators-to-functions}
+\end{minipage}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Konstrukcje iteracyjne}
+
+\begin{minipage}[t]{.45\textwidth}\vspace{0pt}
+\small\raggedright
+ Bloki poleceń w programie wykonywane wielokrotnie (np.~w~ramach
+ cyklów obliczeniowych~$\rightarrow$~\wbl{iteracji}).\\[1ex]
+
+\begin{itemize}
+ \item  pętla \tb{\wpi{while}} (dopóki \wgo{warunek} jest
+ spełniony wykonuj instrukcje w bloku):
+
+ \item pętla \tb{\wpi{for}} (dla kolejnych elementów listy,
+ ciągu tekstowego, tupletu, innych obiektów (tych z~atrybutem
+ \wbl{\tb{\_\_getitem\_\_}}) wykonuj instrukcje w bloku)
+\end{itemize}
+\end{minipage}\hspace{.02\textwidth}%
+\begin{minipage}[t]{.52\textwidth}\vspace{0pt}
+
+ \begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\},gobble=1]
+ \wor{>>>} start, end, step = 10, 50, 5
+ \wor{>>>} \wpi{while} \wgo{start < end}:
+ ...    print(start,\wpi{end=''})
+ ...    start = start + step
+ ... \wgre{else}:
+ ...    print('\wbl{$\backslash$n}Koniec petli')
+ ...
+ 10 15 20 25 30 35 40 45 
+ Koniec petli
+ \wor{>>>} \wbl{range(10,50,5)}
+ [10, 15, 20, 25, 30, 35, 40, 45]
+ \wor{>>>} \wpi{for} i \wpi{in} range(10,50,5):
+ ...     print(i,end='')
+ ... \wgre{else}:  print('$\backslash$nKoniec petli')
+ ...
+ 10 15 20 25 30 35 40 45 
+ Koniec petli
+ \end{Verbatim}
+ % $
+\end{minipage}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Sterowanie w konstrukcjach iteracyjnych}
+\begin{minipage}[t]{.45\textwidth}\vspace{0pt}\small
+
+ \begin{description}
+ \item[\wor{break}] przerywa wykonywanie instrukcji w pętli
+ \item[\wor{continue}] rozpoczyna wykonywanie kolejnego cyklu w pętli
+
+ \item[\wor{pass}] nie wykonuje żadnych działań. Jej użycie zwykle
+ wynika z konieczności zastosowania się do reguł składniowych.
+ \end{description}
+\end{minipage}\hspace{.02\textwidth}%
+\begin{minipage}[t]{.52\textwidth}\vspace{0pt}
+
+ \begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=3mm,commandchars=\\\{\},gobble=1]
+ \wor{>>>} for i in range(10,50,5):
+ ...      if i\wpi{\%}10: \wbl{continue}
+ ...      print(i,end='')
+ ...
+ 10 20 30 40
+ \wor{>>>} while 1:
+ ...      if i<=10: \wbl{break}
+ ...      print(i,end='')
+ ...      i = i - 5
+ ...
+ 45 40 35 30 25 20 15
+ \wor{>>>} while 1:
+ ...    \wbl{pass} \wgo{\#} \wgre{Ctrl-C aby przerwac}
+ ...
+ Traceback (most recent call last):
+   File "<stdin>", line 1, in ?
+ \wgre{KeyboardInterrupt}
+ \end{Verbatim}
+ % $
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Funkcje}
+
+\begin{itemize}\small
+ \item w konwencji programowania strukturalnego, funkcja jest grupą
+ (blokiem) poleceń zdefiniowaną przez programistę
+
+ \item warto definiować funkcje, ponieważ:
+
+\begin{itemize}\small
+
+ \item zawierają implemenację procedur wykorzystywanych wielokrotnie w
+ programie
+
+ \item przy projektowaniu struktury programu, ich użycie pozwala na
+ podzielenie złożonego problemu na oddzielne (prostsze do realizacji)
+ zadania
+
+ \item kod programu napisanego z użyciem funkcji jest bardzej czytelny
+ i łatwiejszy do testowania w celu sprawdzania poprawności działania,
+ lokalizacji i usuwania ewentualnych błędów (ang. \emph{debugging}),
+ poprawiania efektywności (ang. \emph{profiling})
+
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\vspace*{-1ex}\begin{minipage}[t]{.35\textwidth}\vspace{0pt}
+\scriptsize
+\begin{itemize}
+ \item funkcję reprezentuje w~programie jej \wgo{nazwa}
+ (identyfikator)
+ 
+ \item funkcja może pobierać jeden lub więcej \wgre{argumentów} w
+ postaci listy ujętej w parę nawiasów okrągłych i rozdzielonych
+ przecinkami
+
+ \item lista argumentów funkcji może zawierać \wbl{argumenty} podane
+ \wbl{z} ich \wbl{domyślną wartością}
+
+ \item funkcja zwraca \wpi{wynik} dowolnego typu lub pusty obiekt
+ (\wbl{None})
+
+\end{itemize}
+\end{minipage}\hspace{.01\textwidth}%
+\begin{minipage}[t]{.64\textwidth}\vspace{0pt}
+
+\begin{Verbatim}[fontsize=\scriptsize,codes={\catcode`$=3\catcode`^=7},
+                 frame=single,framesep=1mm,commandchars=\\\{\},gobble=0]
+\wor{>>>} \wpi{def} \wgo{transcribe}\wgre{(dna)}\wpi{:}
+...     \wbl{"""Return DNA string as RNA string, by}
+...     \wbl{replacing T (thymine) with U (uracil)"""}
+...     \wpi{return} dna.replace('T', 'U')
+...
+\wor{>>>} transcribe('CGAATATACT')
+'CGAAUAUACU'
+\wor{>>>} def baseContent(dna,\wbl{base='C'}, \wbl{norm=100}):
+...     b = dna.count(base)
+...     percent = \wbl{float}(b)/len(dna)*norm
+...     return percent
+...
+\wor{>>>} myDNA = 'CGAATATACT'
+\wor{>>>} baseContent(myDNA)
+20.0
+\wor{>>>} baseContent(myDNA,'A')
+40.0
+\wor{>>>} baseContent(myDNA, norm=1)
+0.2
+\wor{>>>} print(transcribe.\wgo{__doc__})
+\wbl{Return DNA string as RNA string, by}
+   \wbl{replacing T (thymine) with U (uracil)}
+\wor{>>>} print(\wgre{'int:'},1//5, \wgre{'\wpi{$\backslash$t}float:'},1/5)
+\wgre{int:} 0 	\wgre{float:} 0.2
+\end{Verbatim}
+% $
+\end{minipage}
+\end{frame}
+
+\begin{frame}
+\frametitle{Literatura}
+
+\begin{itemize}\small
+
+ \item The Python Tutorial (\wbl{\url{https://docs.python.org/3/tutorial/}})
+
+ \item The Python Standard Library
+ (\wbl{\url{https://docs.python.org/3/library/}})
+
+ \item The Python
+ HOWTO \mbox{(\wbl{\url{https://docs.python.org/3/howto/index.html}}),}
+ w szczególności: \wor{Regular
+ Expression}, \wor{Sorting}, \wor{argparse}, \wor{Fetch Internet
+ Resources with urllib} a~dla bardziej zaawansowanych \wgre{Functional
+ Programming}
+
+ \item Jupyter Notebook
+  Tutorial \mbox{(\wbl{\url{https://www.dataquest.io/blog/jupyter-notebook-tutorial/}})}
+
+\end{itemize}
+\end{frame}
+
+
+\end{document}
