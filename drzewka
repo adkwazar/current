@@ -1,0 +1,55 @@
+library(ape)
+library(TreeDist)
+tree2 <- ape::read.tree(text='(((((((((seq2212,seq2121),seq2221),seq2211),seq2112),(seq2222,seq2122)),seq2111),(((seq1221,seq1122),((seq1112,seq1111),seq1211)),seq1121)),seq1212),seq1222);
+')
+
+JaccardRobinsonFoulds(tree1, tree2, k = 1)
+
+setwd("C:/Users/48795/Desktop/praca3/praca4/15maj")
+d = read.table("newick_nt2.txt", header = FALSE, sep=";")
+
+for (i in 1:72){
+
+tree1 <- ape::read.tree(text='(((seq1222)),((seq2111,seq2112),(seq2121,seq2122)),((seq2211,seq2212),(seq2221,seq2222)));')
+#tree1 <- ape::read.tree(text='(((seq1111,seq1112),(seq1121,seq1122)),((seq1211,seq1212),(seq1221,seq1222)),((seq2111,seq2112),(seq2121,seq2122)),((seq2211,seq2212),(seq2221,seq2222)));')
+
+tree2 <- ape::read.tree(text=paste(d$V5[i],";"))
+
+print(JaccardRobinsonFoulds(tree1, tree2, k = 1))
+if( i%%8 == 0){print("---------------------")}
+
+
+
+##############
+
+lz = c()
+dft = c()
+h = c()
+ssim = c()
+
+for (i in 1:200){
+
+#tree1 <- ape::read.tree(text='(((seq1222)),((seq2111,seq2112),(seq2121,seq2122)),((seq2211,seq2212),(seq2221,seq2222)));')
+tree1 <- ape::read.tree(text='(((seq1111,seq1112),(seq1121,seq1122)),((seq1211,seq1212),(seq1221,seq1222)),((seq2111,seq2112),(seq2121,seq2122)),((seq2211,seq2212),(seq2221,seq2222)));')
+
+tree2 <- ape::read.tree(text=paste(d$V1[i],";"))
+
+t = JaccardRobinsonFoulds(tree1, tree2, k = 1)
+if( i%%4 == 1){lz = append(lz,t )}
+if( i%%4 == 2){dft = append(dft,t )}
+if( i%%4 == 3){h = append(h,t )}
+if( i%%4 == 0){ssim = append(ssim,t )}
+}
+
+data = data.frame(LZC = lz, DFT=dft, HURST=h, SSIM=ssim)
+
+boxplot(data,las=2,xlab="Methods",ylab="JRF distance",col=c("red","blue","green","yellow"))
+
+dev.copy(png,'losowe0.png', width = 1000, height = 400)
+par(cex.lab=1.5) # is for y-axis
+par(cex.axis=1.5) 
+boxplot(data,las=2,xlab="Methods",ylab="JRF distance",col=c("green","red","blue","orange"))
+dev.off()
+
+
+pt3/pt4--- bialkowe z reprezentacją wkadratu
